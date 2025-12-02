@@ -147,6 +147,5 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anonymous key |
 
-## License
 
-MIT License - feel free to use this project for your own purposes.
+
