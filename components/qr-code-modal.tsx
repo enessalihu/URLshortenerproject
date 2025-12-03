@@ -1,42 +1,40 @@
-"use client"
+// src/components/qr-code-modal.tsx
 
-import { useEffect, useRef } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Download } from "lucide-react"
-import QRCode from "qrcode"
+"use client";
+
+import { useRef } from "react";
+import dynamic from 'next/dynamic'; 
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
+
+
+const DynamicQRCodeCanvas = dynamic(
+  () => import('./QRCodeCanvas'), // this should import the default export
+  { 
+    ssr: false, 
+    loading: () => <div className="bg-white p-4 rounded-lg w-64 h-64 flex items-center justify-center">Loading QR...</div>
+  }
+);
 
 interface QrCodeModalProps {
-  isOpen: boolean
-  onClose: () => void
-  url: string
-  shortCode: string
+  isOpen: boolean;
+  onClose: () => void;
+  url: string;
+  shortCode: string;
 }
 
 export function QrCodeModal({ isOpen, onClose, url, shortCode }: QrCodeModalProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
-  useEffect(() => {
-    if (isOpen && canvasRef.current) {
-      QRCode.toCanvas(canvasRef.current, url, {
-        width: 256,
-        margin: 2,
-        color: {
-          dark: "#000000",
-          light: "#ffffff",
-        },
-      })
-    }
-  }, [isOpen, url])
+  const canvasRef = useRef<HTMLCanvasElement>(null); 
 
   const handleDownload = () => {
     if (canvasRef.current) {
-      const link = document.createElement("a")
-      link.download = `qr-${shortCode}.png`
-      link.href = canvasRef.current.toDataURL("image/png")
-      link.click()
+      const link = document.createElement("a");
+      link.download = `qr-${shortCode}.png`;
+      link.href = canvasRef.current.toDataURL("image/png");
+      link.click();
     }
-  }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -45,9 +43,15 @@ export function QrCodeModal({ isOpen, onClose, url, shortCode }: QrCodeModalProp
           <DialogTitle className="text-white">QR Code</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col items-center gap-4 py-4">
-          <div className="bg-white p-4 rounded-lg">
-            <canvas ref={canvasRef} />
-          </div>
+          
+          {/*  DYNAMIC COMPONENT is here */}
+          {isOpen && url && (
+            <DynamicQRCodeCanvas 
+              link={url} 
+              canvasRef={canvasRef} 
+            />
+          )}
+
           <p className="text-sm text-gray-400 text-center break-all">{url}</p>
           <Button onClick={handleDownload} className="bg-white text-black hover:bg-gray-200">
             <Download className="mr-2 h-4 w-4" />
@@ -56,5 +60,5 @@ export function QrCodeModal({ isOpen, onClose, url, shortCode }: QrCodeModalProp
         </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
