@@ -84,6 +84,26 @@ CREATE POLICY "Allow public update for click count" ON urls
 CREATE POLICY "Allow public delete" ON urls
   FOR DELETE USING (true);
 \`\`\`
+    Server Configuration Check
+
+The server is correctly configured in package.json to listen on all network interfaces (0.0.0.0), allowing external network access:
+
+JSON
+// package.json
+"scripts": {
+  "dev": "next dev -H 0.0.0.0 -p 3000", 
+  // ...
+}
+4b. Local IP Override for Testing
+
+This is the mandatory step to make the QR code work on a mobile device:
+
+Find Your Local IP: In your terminal, find your active network IP address (e.g., 192.168.x.x):
+Bash
+ifconfig | grep "inet "
+
+
+
 
 ### 5. Run the Development Server
 
@@ -93,7 +113,7 @@ npm run dev
 pnpm dev
 \`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open "http://[YOUR_LOCAL_IP]:3000"  in your browser.
 
 ## Project Structure
 
@@ -108,6 +128,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 │   ├── url-list.tsx            # List of shortened URLs
 │   ├── url-card.tsx            # Individual URL card
 │   └── qr-code-modal.tsx       # QR code display modal
+I   I___ QRCodeCanvas.txt       #
 ├── lib/
 │   ├── supabase/           # Supabase client configuration
 │   ├── types.ts            # TypeScript type definitions
