@@ -12,12 +12,18 @@ interface UrlCardProps {
   onDelete: () => void
 }
 
+const SHORT_DOMAIN =
+  process.env.NEXT_PUBLIC_SHORT_DOMAIN ||
+  (typeof window !== "undefined" ? window.location.origin : "https://short.link")
+
 export function UrlCard({ url, onDelete }: UrlCardProps) {
   const [copied, setCopied] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
   const [showQrModal, setShowQrModal] = useState(false)
 
-  const shortUrl = `${typeof window !== "undefined" ? window.location.origin : ""}/r/${url.short_code}`
+  const shortUrl = `${SHORT_DOMAIN}/r/${url.short_code}`
+  // Display URL (cleaner format for display)
+  const displayUrl = `https://short.link/${url.short_code}`
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(shortUrl)
