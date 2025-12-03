@@ -96,9 +96,10 @@ JSON
   "dev": "next dev -H 0.0.0.0 -p 3000", 
   // ...
 }
-4b. Local IP Override for Testing
+    
+    Local IP Override for Testing
 
-This is the mandatory step to make the QR code work on a mobile device:
+ This is the mandatory step to make the QR code work on a mobile device:
 
 Find Your Local IP: In your terminal, find your active network IP address (e.g., 192.168.x.x):
 Bash
