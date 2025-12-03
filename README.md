@@ -86,7 +86,9 @@ CREATE POLICY "Allow public delete" ON urls
 \`\`\`
     Server Configuration Check
 
-The server is correctly configured in package.json to listen on all network interfaces (0.0.0.0), allowing external network access:
+
+
+   ## 5. The server is correctly configured in package.json to listen on all network interfaces (0.0.0.0), allowing external network access:
 
 JSON
 // package.json
@@ -105,7 +107,7 @@ ifconfig | grep "inet "
 
 
 
-### 5. Run the Development Server
+### 6. Run the Development Server
 
 \`\`\`bash
 npm run dev
