@@ -36,10 +36,10 @@ cd url-shortener
 
 ### 2. Install Dependencies
 
-\`\`\`bash
-npm install
-# or
-pnpm install
+    \`\`\`bash
+    npm install
+    # or
+    pnpm install
 \`\`\`
 
 ### 3. Set Up Supabase
@@ -48,10 +48,10 @@ pnpm install
 2. Go to **Settings > API** to find your credentials
 3. Create a `.env.local` file in the project root:
 
-\`\`\`env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-\`\`\`
+       \`\`\`env
+       NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+       NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+       \`\`\`
 
 ### 4. Create Database Table
 
@@ -91,13 +91,13 @@ CREATE POLICY "Allow public delete" ON urls
    ## 5. The server is correctly configured in package.json to listen on all network interfaces (0.0.0.0), allowing external network access:
 
 JSON
-// package.json
+//package.json
 "scripts": {
   "dev": "next dev -H 0.0.0.0 -p 3000", 
   // ...
 }
     
-    Local IP Override for Testing
+   Local IP Override for Testing
 
  This is the mandatory step to make the QR code work on a mobile device:
 
@@ -110,11 +110,11 @@ ifconfig | grep "inet "
 
 ### 6. Run the Development Server
 
-\`\`\`bash
-npm run dev
-# or
-pnpm dev
-\`\`\`
+       \`\`\`bash
+          npm run dev
+      # or
+     pnpm dev
+     \`\`\`
 
 Open "http://[YOUR_LOCAL_IP]:3000"  in your browser.
 
